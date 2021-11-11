@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery roundSlider - JS Bin</title>
+    <link rel="stylesheet" href='/static/main.css' />
+    <script src="/static/jquery.min.js"></script>
+    <link href="/static/roundslider.min.css" rel="stylesheet" />
+    <script src="/static/roundslider.min.js"></script>
+</head>
+
+<body>
+
+    <div class="flexcon">
+        <p>STOP [stop effects]</p>
+        <div class="container">
+            <input id="stop_effect" type="button" value="stop" onclick="stop_effect();" />
+        </div>
+
+        <script>
+            $("#stop_effect").click(function () { // or $("input#<input id, if it has one>")...
+                $.getJSON('/stop_effect');
+            });
+        </script>
+
+        <p>DEFAULT [restore default parameters]</p>
+        <div class="container">
+            <input id="default_effect" type="button" value="default" onclick="default_effect();" />
+        </div>
+
+        <script>
+            $("#default_effect").click(function () { // or $("input#<input id, if it has one>")...
+                $.getJSON('/default_effect');
+            });
+        </script>
+
+    </div>
+
+    <div class="grid-container">
+        <div class="grid-item">
+
+            <p>Base Effect</p>
+            <div id="base_effect_slider" class="slider"></div>
+
+            <script>
+                var base_effect;
+                $("#base_effect_slider").roundSlider({
+                    min: 0,
+                    max: 10,
+                    radius: 85,
+                    width: 10,
+                    startAngle: 0,
+                    endAngle: "+340",
+                    sliderType: "min-range",
+                    handleSize: "+16",
+                    editableTooltip: false,
+                    handleShape: "dot",
+                    tooltipFormat: "tooltipVal1",
+                    change: function () {
+                        var obj1 = $("#base_effect_slider").data("roundSlider");
+                        base_effect = obj1.getValue();
+                        value: 1
+                        $.getJSON('/base_effect', {
+                            slide_val: base_effect
+                        });
+                    }
+                });
+
+                function tooltipVal1(args) {
+                    var effects = ['off', 'glimmer_async', 'glimmer_overlap', 'glimmer_sync', 'standby', 'strobe_async', 'strobe_binary', 'strobe_binary_sequential', 'strobe_random', 'strobe_sync', 'zpeziale'];
+
+                    return effects[args.value];
+                }
+            </script>
+
+        </div>
+        <div class="grid-item">
+            <p>max intensity</p>
+            <div id="max_intensity_slider" class="slider"></div>
+
+            <script>
+                var max_intensity;
+                $("#max_intensity_slider").roundSlider({
+                    min: 1,
+                    max: 1000,
+                    radius: 85,
+                    width: 10,
+                    sliderType: "min-range",
+                    handleSize: "+16",
+                    handleShape: "dot",
+                    endAngle: "+340",
+                    change: function () {
+                        var obj2 = $("#max_intensity_slider").data("roundSlider");
+                        max_intensity = obj2.getValue();
+                        value: 1
+                        $.getJSON('/max_intensity_slider_value', {
+                            slide_val: max_intensity
+                        });
+                    }
+                });
+            </script>
+
+        </div>
+        <div class="grid-item">
+            <p>Attack</p>
+            <div id="attack_slider" class="slider"></div>
+
+            <script>
+                var attack;
+
+                $("#attack_slider").roundSlider({
+                    min: 2,
+                    max: 100,
+                    radius: 85,
+                    width: 10,
+                    sliderType: "min-range",
+                    handleSize: "+16",
+                    handleShape: "dot",
+                    endAngle: "+340",
+                    change: function () {
+                        var obj3 = $("#attack_slider").data("roundSlider");
+                        attack = obj3.getValue();
+                        value: 1
+                        $.getJSON('/attack_slider_value', {
+                            slide_val: attack
+                        });
+                    }
+                });
+            </script>
+        </div>
+        <div class="grid-item">
+
+            <p>Decay</p>
+            <div id="decay_slider" class="slider"></div>
+
+            <script>
+                var decay;
+                $("#decay_slider").roundSlider({
+                    min: 0,
+                    max: 100,
+                    radius: 85,
+                    width: 10,
+                    sliderType: "min-range",
+                    handleSize: "+16",
+                    handleShape: "dot",
+                    endAngle: "+340",
+                    change: function () {
+                        var obj4 = $("#decay_slider").data("roundSlider");
+                        decay = obj4.getValue();
+                        value: 1
+                        $.getJSON('/decay_slider_value', {
+                            slide_val: decay
+                        });
+                    }
+                });
+            </script>
+        </div>
+        <div class="grid-item">
+
+            <p>width</p>
+            <div id="width_slider" class="slider"></div>
+
+            <script>
+                var width;
+                $("#width_slider").roundSlider({
+                    min: 0,
+                    max: 1000,
+                    radius: 85,
+                    width: 10,
+                    sliderType: "min-range",
+                    handleSize: "+16",
+                    handleShape: "dot",
+                    endAngle: "+340",
+                    change: function () {
+                        var obj5 = $("#width_slider").data("roundSlider");
+                        width = obj5.getValue();
+                        value: 1
+                        $.getJSON('/width_slider_value', {
+                            slide_val: width
+                        });
+                    }
+                });
+            </script>
+        </div>
+        <div class="grid-item">
+
+            <p>spacing</p>
+            <div id="spacing_slider" class="slider"></div>
+
+            <script>
+                var spacing;
+                $("#spacing_slider").roundSlider({
+                    min: 0,
+                    max: 2000,
+                    radius: 85,
+                    width: 10,
+                    sliderType: "min-range",
+                    handleSize: "+16",
+                    handleShape: "dot",
+                    endAngle: "+340",
+                    change: function () {
+                        var obj5 = $("#spacing_slider").data("roundSlider");
+                        spacing = obj5.getValue();
+                        value: 1
+                        $.getJSON('/spacing_slider_value', {
+                            slide_val: spacing
+                        });
+                    }
+                });
+            </script>
+        </div>
+
+    </div>
+</body>
+
+</html>
