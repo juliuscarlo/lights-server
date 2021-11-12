@@ -5,8 +5,7 @@ from time import sleep
 class Blink:
     @staticmethod
     def simultaneous(config):
-        """Perform one increment per milisec, so the number of steps depends on attack / decay
-        given in seconds."""
+        """Blinks the clients simultaneously."""
 
         attack_steps = max(1, int(config.attack * config.resolution))
         decay_steps = max(1, int(config.decay * config.resolution))
@@ -40,8 +39,7 @@ class Blink:
 
     @staticmethod
     def sequential(config):
-        """Perform one increment per milisec, so the number of steps depends on attack / decay
-        given in seconds."""
+        """Blinks the clients sequentially."""
 
         attack_steps = max(1, int(config.attack * config.resolution))
         decay_steps = max(1, int(config.decay * config.resolution))
@@ -73,7 +71,7 @@ class Blink:
 
     @staticmethod
     def parallel(config):
-        """xxx"""
+        """Blinks the clients with an offset, allowing parallelized intensity transitions."""
         attack_steps = max(1, int(config.attack * config.resolution))
         decay_steps = max(1, int(config.decay * config.resolution))
 
@@ -97,10 +95,12 @@ class Blink:
             intensity_list.append(intensity)
             intensity -= decay_increment
 
+        print(intensity_list)
+
         # pad list with zeros in line with width parameter to make an offset between clients
         # don't forget padding the end as well
-        offset = config.width / 1000 * [0]
-        padded_intensity_list = offset + intensity_list + offset * len(config.clients - 1)
+        offset = max(1, config.width) * [0]
+        padded_intensity_list = offset + intensity_list + offset * (len(config.clients) - 1)
 
         # keep track of the offset for each client
         offset_multiplier = 0
@@ -116,8 +116,7 @@ class Blink:
 
     @staticmethod
     def random(config):
-        """Blinks the clients randomly."""
-
+        """Blinks a random client."""
         attack_steps = max(1, int(config.attack * config.resolution))
         decay_steps = max(1, int(config.decay * config.resolution))
 
@@ -146,7 +145,7 @@ class Blink:
 
     @staticmethod
     def binary(config):
-        """xxx"""
+        """Hard cut-off parallel blinks."""
         sleep(0.001)
         intensity = config.max_intensity
         for client in config.clients:
@@ -161,7 +160,7 @@ class Blink:
 
     @staticmethod
     def binary_sequential(config):
-        """xxx"""
+        """Hard cut-off sequential blinks."""
         sleep(0.001)
         intensity = config.max_intensity
         for client in config.clients:

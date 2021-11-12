@@ -130,14 +130,15 @@ class EffectRunner:
 class EffectSwitcher(object):
     """Provides a dispatch method to dynamically determine which effect
     function needs to be called during runtime."""
+
     @staticmethod
     def effect_list():
         """List available effects"""
         effect_list = [attribute for attribute in dir(EffectSwitcher) if callable(
             getattr(EffectSwitcher, attribute)) and attribute.startswith('__') is False and
-            attribute is not 'select' and attribute is not 'effect_list']
+                       attribute is not 'select' and attribute is not 'effect_list']
         print(effect_list)
-        return(effect_list)
+        return (effect_list)
 
     def select(self, argument, config):
         """Dispatch method"""
@@ -187,6 +188,9 @@ class EffectSwitcher(object):
 
 
 class Automation:
+    """Automate some config values for automatic changes to running effects."""
+
+    # TODO: Implement automation
 
     def __init__(self, target_attribute, upper_bound, lower_bound, step_size) -> None:
         self.target_attribute = target_attribute
@@ -207,8 +211,6 @@ class Automation:
     def deactivate(self, config, target_attribute):
         if target_attribute in Automation.automation_list:
             Automation.automation_list.remove(target_attribute)
-
-    # use percentage values? probably best for width and spacing automation, (attack and decay)?
 
     @staticmethod
     def engage(self):
@@ -293,10 +295,9 @@ if __name__ == '__main__':
 
     default_config = DefaultConfig()
 
-    aborted = Config()
     print('System initialized.')
+    print(f"Connected clients: {len(config.clients)}")
 
     runner = EffectRunner()
 
     app.run(debug=False, host="192.168.4.1", port=5000)
-    # app.run(debug=False, host="192.168.1.23", port=5000)

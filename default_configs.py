@@ -64,13 +64,13 @@ class DefaultConfig:
 
         self.glimmer_overlap = \
             {"resolution": 1000,
-             "attack": 0.01,
-             "decay": 0.01,
+             "attack": 0.05,
+             "decay": 0.05,
              "curve": "lin",
              "min_intensity": 0,
              "max_intensity": 1,
-             "width": 10,
-             "spacing": 10}
+             "width": 20,
+             "spacing": 100}
 
         self.standby = \
             {"resolution": 1000,
