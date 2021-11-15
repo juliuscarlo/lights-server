@@ -64,8 +64,8 @@ class DefaultConfig:
 
         self.glimmer_overlap = \
             {"resolution": 1000,
-             "attack": 0.05,
-             "decay": 0.05,
+             "attack": 0.002,
+             "decay": 0.002,
              "curve": "lin",
              "min_intensity": 0,
              "max_intensity": 1,

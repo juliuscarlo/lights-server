@@ -72,8 +72,8 @@ class Blink:
     @staticmethod
     def parallel(config):
         """Blinks the clients with an offset, allowing parallelized intensity transitions."""
-        attack_steps = max(1, int(config.attack * config.resolution))
-        decay_steps = max(1, int(config.decay * config.resolution))
+        attack_steps = max(20, int(config.attack * config.resolution))
+        decay_steps = max(20, int(config.decay * config.resolution))
 
         if config.curve == "lin":
             attack_increment = (config.max_intensity -
@@ -95,21 +95,20 @@ class Blink:
             intensity_list.append(intensity)
             intensity -= decay_increment
 
-        print(intensity_list)
-
         # pad list with zeros in line with width parameter to make an offset between clients
         # don't forget padding the end as well
-        offset = max(1, config.width) * [0]
-        padded_intensity_list = offset + intensity_list + offset * (len(config.clients) - 1)
-
-        # keep track of the offset for each client
+        offset = max(len(intensity_list), config.width) * [0]
+        print(offset)
         offset_multiplier = 0
+        # add some margin to offset
+        padded_intensity_list = offset + intensity_list + offset
+        print(padded_intensity_list)
 
         # process the list with a for client in clients loop, but add length of padding and padding*2 to two clients
         for index in range(len(intensity_list)):
             for client in config.clients:
                 offset_multiplier = offset_multiplier % len(config.clients)
-                client.value = padded_intensity_list[index + offset_multiplier * len(offset)]
+                client.value = padded_intensity_list[index + offset_multiplier * config.width]
                 offset_multiplier += 1
 
         sleep(config.spacing / 1000)
