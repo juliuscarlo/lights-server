@@ -1,3 +1,5 @@
+"""Default configs to reload standard effect settings instantly."""
+
 class DefaultConfig:
     def __init__(self) -> None:
         self.strobe_sync = \

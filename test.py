@@ -1,6 +1,4 @@
-#!/usr/bin/python3.7
-
-"""Webserver for the lightroom control system """
+"""Basic tests for the RemoteGPIO PWMLED functionality."""
 
 # from flask_sqlalchemy import SQLAlchemy
 import threading

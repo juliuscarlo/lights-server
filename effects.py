@@ -1,3 +1,5 @@
+""" Base effects to create visual patterns using PWMLEDs."""
+
 from helper import Helper
 from time import sleep
 
@@ -72,6 +74,7 @@ class Blink:
     @staticmethod
     def parallel(config):
         """Blinks the clients with an offset, allowing parallelized intensity transitions."""
+        # TODO: Not fully implemented yet.
         attack_steps = max(20, int(config.attack * config.resolution))
         decay_steps = max(20, int(config.decay * config.resolution))
 

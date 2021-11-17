@@ -1,10 +1,8 @@
 #!/usr/bin/python3.7
 
-"""Webserver for the lightroom control system """
+"""Flask app for running a RemoteGPIO PWMLED based server that creates coordinated
+light effects that can be controlled live through a single page front-end."""
 
-# from flask_sqlalchemy import SQLAlchemy
-
-from helper import Helper
 from default_configs import DefaultConfig
 
 from flask import Flask
@@ -188,9 +186,9 @@ class EffectSwitcher(object):
 
 
 class Automation:
-    """Automate some config values for automatic changes to running effects."""
+    """Automate some config value changes for automatic changes to running effects."""
 
-    # TODO: Implement automation
+    # TODO: Not fully implemented.
 
     def __init__(self, target_attribute, upper_bound, lower_bound, step_size) -> None:
         self.target_attribute = target_attribute
@@ -223,11 +221,6 @@ class Automation:
     @staticmethod
     def decrement(self):
         pass
-
-
-class Attribute(Automation):
-    def __init__(self) -> None:
-        super().__init__()
 
 
 def system_check(clients):
